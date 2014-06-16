@@ -72,10 +72,13 @@ class tempest(
 
   include 'tempest::params'
 
-  ensure_packages([
-    'git',
-    'python-setuptools',
-  ])
+  if !defined(Package['git']) {
+    ensure_packages('git')
+  }
+
+  if !defined(Package['python-setuptools']) {
+    ensure_packages('python-setuptools')
+  }
 
   ensure_packages($tempest::params::dev_packages)
 
